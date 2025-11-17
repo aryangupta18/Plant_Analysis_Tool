@@ -1,0 +1,15 @@
+Date: 6/11/25
+
+the upload directory was not specified that was why after clicking analyze button we were getting the error "MulterError: Unexpected Field"
+
+so we had to connect to the upload directory "const uploadDir = path.join(__dirname, 'upload');" and the pass that directory to the multer configuration "dest: uploadDir"
+
+// configure multer
+const uploadDir = path.join(__dirname, 'upload');
+// ensure upload directory exists
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+const upload = multer({
+    dest: uploadDir,
+});
